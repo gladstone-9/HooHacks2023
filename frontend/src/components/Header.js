@@ -8,8 +8,10 @@ let Header = (props) =>{
     const [data, setData] = useState([]);
 
     let sendRequest = () =>{
-        console.log("API request sent with latitude " + latitude + " and longitude " + longitude);
-        setData([{"number": 345, "address": "1234 Bank Branch Road, McLean, VA"}]);
+        let url = 'http://api.nessieisreal.com/atms?lat='+ latitude + '&lng=' + longitude + '&rad='+ 100 + '&key=' + "";
+        fetch(url)
+        .then((response) => response.json())
+        .then((theData) => setData(theData["data"][0]));
     }
 
     return <>
@@ -21,7 +23,7 @@ let Header = (props) =>{
             </Box>
             <Button onClick={sendRequest} variant="contained" sx={{maxWidth:"300px", marginTop:"16px", marginBottom:"32px"}}>Find ATM</Button>
             <Box>
-                {data.length === 0 ? <img src="Pig.png" height={500} sx={{marginTop:"32px"}}/> : <AtmList data={data} />}
+                {data.length ? <img src="Pig.png" height={500} sx={{marginTop:"32px"}}/> : <AtmList data={data} />}
             </Box>
         </Box>
         
