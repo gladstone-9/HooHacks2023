@@ -4,8 +4,11 @@
 import requests
 import json
 
+secret_file = open("secret.json")
+data = json.load(secret_file)
+apiKey = data["api_key"]
+
 customerId = 'your customerId here'
-apiKey = 'your apiKey here'
 
 url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
 payload = {
